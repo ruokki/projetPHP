@@ -12,28 +12,78 @@
 	<!-- END CSS -->
 </head>
 <body>
-	<table>
-		<tr>
-			<th>Titre original</th>
-			<th>Titre français</th>
-			<th>Pays</th>
-			<th>Année de sortie</th>
-			<th>Durée</th>
-			<th>Colorisation</th>
-			<th>Réalisateur</th>
-		</tr>
-		<?php foreach($allFilm as $film) : ?>
-		<tr>
-			<td><?php echo $film->titre_original; ?></td>
-			<td><?php echo $film->titre_francais; ?></td>
-			<td><?php echo $film->pays; ?></td>
-			<td><?php echo $film->date; ?></td>
-			<td><?php echo $film->duree.' min'; ?></td>
-			<td><?php echo $film->couleur; ?></td>
-			<td><?php echo $film->prenom.' '.$film->nom; ?></td>
-		</tr>
-		<?php endforeach; ?>
-	</table>
+	<div class="container">
+				<header>
+					<h1>Liste des films</h1>
+				</header>
+			
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<section>
+							<form class="form-inline" role="form">
+								<legend>Formulaire de recherche</legend>
+								<div class="row">
+									<div class="form-group col-md-3">
+										<label for="inputNameReal">Nom du réalisateur :</label>
+										<input id="inputNameReal" class="form-control" type="text" name="real" placeholder="Nom du réalisateur..."/>
+									</div>
+									<div class="form-group col-md-3">	
+										<label>Genre :</label>		
+										<select name="genre" class="form-control">
+											<?php
+												foreach($genre as $row) {
+													echo '<option value="'.$row->code_genre.'">'.$row->nom_genre.'</option>';
+												}
+											?>
+										</select>
+									</div>
+									<div class="form-group col-md-2">
+										<label for="inputYear" >Année :</label>
+										<input id="inputYear" class="form-control" type="text" name="year" placeholder="Année..."/>
+									</div>
+									<div class="form-group col-md-2">
+										<label>Couleur :</label>
+										<div>
+											<div><input type="checkbox" name="nb" value="nb" /> Noir et blanc</div>
+											<div><input type="checkbox" name="couleur" value="couleur" /> Couleur</div>
+											<div><input type="checkbox" name="both" value="both" /> Noir et blanc / Couleur</div>		
+										</div>
+									</div>
+									<div class="form-group col-md-2">
+										<input type="submit" id="submit" value="Rechercher" class="btn btn-primary pull-right" />
+									</div>
+								</div>
+							</form>
+						</section>
+					</div>
+
+					<section class="panel-body">
+						<table>
+							<tr>
+								<th>Titre original</th>
+								<th>Titre français</th>
+								<th>Pays</th>
+								<th>Année de sortie</th>
+								<th>Durée</th>
+								<th>Colorisation</th>
+								<th>Réalisateur</th>
+							</tr>
+							<?php foreach($allFilm as $film) : ?>
+							<tr>
+								<td><?php echo $film->titre_original; ?></td>
+								<td><?php echo $film->titre_francais; ?></td>
+								<td><?php echo $film->pays; ?></td>
+								<td><?php echo $film->date; ?></td>
+								<td><?php echo $film->duree.' min'; ?></td>
+								<td><?php echo $film->couleur; ?></td>
+								<td><?php echo $film->prenom.' '.$film->nom; ?></td>
+							</tr>
+							<?php endforeach; ?>
+						</table>
+			
+					</section>
+				</div>
+			</div>
 
 	<!-- SCRIPT JS -->
 	<script type="text/javascript" src="<?php echo base_url(); ?>asset/js/lib/jquery-1.10.2.min.js"></script>

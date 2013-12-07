@@ -8,6 +8,12 @@ class Film_model extends CI_Model {
 		else return FALSE;
 	}
 
+	public function getGenre() {
+		$result = $this->db->select()->from('genres')->get();
+		if($result->num_rows() > 0) return $result->result();
+		else return FALSE;
+	}
+
 }
 
 /* End of file film_model.php */

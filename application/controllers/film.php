@@ -21,6 +21,7 @@ class Film extends CI_Controller {
 	{
 		$this->load->model('Film_model','', TRUE);
 		$data['allFilm'] = $this->Film_model->getAllFilm();
+		$data['genre'] = $this->Film_model->getGenre();
 		$this->load->view('film_index', $data);
 	}
 }
