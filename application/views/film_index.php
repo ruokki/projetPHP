@@ -7,8 +7,8 @@
 	<!-- END META -->
 
 	<!-- CSS -->
-	<link rel="stylesheet" href="<?php echo base_url(); ?>asset/bootstrap-3.0.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/style.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap-3.0.2/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css" type="text/css">
 	<!-- END CSS -->
 </head>
 <body>
@@ -20,16 +20,17 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<section>
-							<form class="form-inline" role="form">
+							<form class="form-inline" role="form" name="search">
 								<legend>Formulaire de recherche</legend>
 								<div class="row">
 									<div class="form-group col-md-3">
 										<label for="inputNameReal">Nom du réalisateur :</label>
-										<input id="inputNameReal" class="form-control" type="text" name="real" placeholder="Nom du réalisateur..."/>
+										<input id="inputNameReal" class="form-control" type="text" name="realisateur" placeholder="Nom du réalisateur..."/>
 									</div>
 									<div class="form-group col-md-3">	
 										<label>Genre :</label>		
-										<select name="genre" class="form-control">
+										<select name="genre" class="form-control" multiple="multiple">
+											<option selected="selected" value="o">Aucune</option>
 											<?php
 												foreach($genre as $row) {
 													echo '<option value="'.$row->code_genre.'">'.$row->nom_genre.'</option>';
@@ -39,14 +40,14 @@
 									</div>
 									<div class="form-group col-md-2">
 										<label for="inputYear" >Année :</label>
-										<input id="inputYear" class="form-control" type="text" name="year" placeholder="Année..."/>
+										<input id="inputYear" class="form-control" type="text" name="date" placeholder="Année..."/>
 									</div>
 									<div class="form-group col-md-2">
 										<label>Couleur :</label>
 										<div>
-											<div><input type="checkbox" name="nb" value="nb" /> Noir et blanc</div>
+											<div><input type="checkbox" name="nb" value="NB" /> Noir et blanc</div>
 											<div><input type="checkbox" name="couleur" value="couleur" /> Couleur</div>
-											<div><input type="checkbox" name="both" value="both" /> Noir et blanc / Couleur</div>		
+											<div><input type="checkbox" name="both" value="NB/couleur" /> Noir et blanc / Couleur</div>		
 										</div>
 									</div>
 									<div class="form-group col-md-2">
@@ -86,9 +87,9 @@
 			</div>
 
 	<!-- SCRIPT JS -->
-	<script type="text/javascript" src="<?php echo base_url(); ?>asset/js/lib/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>asset/bootstrap-3.0.2/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>asset/js/script.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/lib/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/bootstrap-3.0.2/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/script.js"></script>
 	<!-- END SCRIPT JS -->
 </body>
 </html>
