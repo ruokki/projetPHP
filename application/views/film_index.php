@@ -30,7 +30,7 @@
 									<div class="form-group col-md-3">	
 										<label>Genre :</label>		
 										<select name="genre" class="form-control" multiple="multiple">
-											<option selected="selected" value="o">Aucune</option>
+											<option selected="selected" value="0">Aucune</option>
 											<?php
 												foreach($genre as $row) {
 													echo '<option value="'.$row->code_genre.'">'.$row->nom_genre.'</option>';
@@ -59,8 +59,8 @@
 					</div>
 
 					<section class="panel-body">
-						<table>
-							<tr>
+						<table id="film">
+							<tr id="head">
 								<th>Titre original</th>
 								<th>Titre français</th>
 								<th>Pays</th>
@@ -69,17 +69,7 @@
 								<th>Colorisation</th>
 								<th>Réalisateur</th>
 							</tr>
-							<?php foreach($allFilm as $film) : ?>
-							<tr>
-								<td><?php echo $film->titre_original; ?></td>
-								<td><?php echo $film->titre_francais; ?></td>
-								<td><?php echo $film->pays; ?></td>
-								<td><?php echo $film->date; ?></td>
-								<td><?php echo $film->duree.' min'; ?></td>
-								<td><?php echo $film->couleur; ?></td>
-								<td><?php echo $film->prenom.' '.$film->nom; ?></td>
-							</tr>
-							<?php endforeach; ?>
+							<?php echo $tableFilm; ?>
 						</table>
 			
 					</section>

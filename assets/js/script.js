@@ -15,7 +15,8 @@
 			method: "post",
 			data: data,
 			success: function(data){
-				console.log(data);
+				$("tr:not(#head)").remove();
+				$("#film").append(data);
 			}
 		});
 
