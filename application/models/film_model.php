@@ -17,10 +17,12 @@ class Film_model extends CI_Model {
 		else return FALSE;
 	}
 
-	public function getReal() {
-		$query = $this->db->select('realisateur')
+	public function getReal($nom) {
+		$query = $this->db->select('nom')
 						  ->distinct()
 						  ->from('films')
+						  ->join('individus', 'individus.code_indiv = films.realisateur')
+						  ->like('nom', $nom, 'after')
 						  ->get();
 	    if($query->num_rows() > 0) return $query->result();
 	    else return FALSE;
@@ -45,8 +47,9 @@ class Film_model extends CI_Model {
 	   		}
 	   	}
 	   	$query = $this->db->get();
-		if($query->num_rows() > 0) return $query->result();
-		else return FALSE;
+	   	return $this->db->last_query();
+		// if($query->num_rows() > 0) return $query->result();
+		// else return FALSE;
 	}
 
 }

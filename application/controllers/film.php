@@ -19,8 +19,8 @@ class Film extends CI_Controller {
 	}
 
 	/**
-	* Fonction uniquement accessible par AJAX, elle récupère l'ensemble des films répondant aux critères de recherche
-	* @return void
+	* Fonction uniquement accessible via AJAX, elle récupère l'ensemble des films répondant aux critères de recherche
+	* @return String
 	*/
 	public function search() {
 		if($this->input->is_ajax_request()) {
@@ -39,17 +39,68 @@ class Film extends CI_Controller {
 				}
 			}
 			$result = $this->Film_model->searchFilm($post);
-			if($result){ 
-				$data['allFilm'] = $result;
-				$this->load->view('film_table',$data);
-			}
-			else {
-				echo '<tr></tr>';
+			echo $result;
+			// if($result){ 
+			// 	$data['allFilm'] = $result;
+			// 	$this->load->view('film_table',$data);
+			// }
+			// else {
+			// 	echo '<tr></tr>';
+			// }
+		}
+		else {
+			show_404();
+		}
+	}
+
+	/**
+	* Fonction uniquement accessible via AJAX
+	* Récupère la liste des réalisateurs correspondants (module d'autocomplétion)
+	* @return JSON
+	*/
+	public function getReal(){
+		if($this->input->is_ajax_request()) {
+			$search = $this->input->post("term");
+			$this->load->model('Film_model','', TRUE);
+			$reals = $this->Film_model->getReal($search);
+			if($reals) {
+				echo json_encode($reals);
 			}
 		}
 		else {
 			show_404();
 		}
+	}
+
+	/**
+	* Fonction générant le fichier XML en fonction du formulaire de XMLForm
+	* Télécharge le fichier XML généré
+	* @return void
+	*/
+
+	public function exportXML() {
+		if($post = $this->input->post()) {
+			$dom = new DomDocument('1.0','utf-8');
+			$film = $dom->createElement('film');
+			$real = $dom->createElement('realiseur','Jean-Luc Godard');
+			$film->appendChild($real);
+			$dom->appendChild($film);
+			echo $dom->saveXML();
+
+		}
+		else {
+
+		}
+	}
+
+	public function test() {
+		$this->load->model('Film_model','', TRUE);
+		$data['allFilm'] = $this->Film_model->getAllFilm();
+
+		$data['tableFilm'] = $this->load->view('table_test',$data,TRUE);
+
+		$data['genre'] = $this->Film_model->getGenre();
+		$this->load->view('test', $data);
 	}
 }
 
