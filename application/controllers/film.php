@@ -86,28 +86,58 @@ class Film extends CI_Controller {
 	*/
 
 	public function exportXML() {
-		if($post = $this->input->post()) {
+		session_start();
+		if($genre = $this->input->post("genre")) {
+			$this->load->model('Film_model','',TRUE);
+			$this->load->helper('file');
+			$this->load->helper('download');
+
+			$data['genre'] = $genre;
+			$result = $this->Film_model->getFilmXML($data);
 			$dom = new DomDocument('1.0','utf-8');
-			$film = $dom->createElement('film');
-			$real = $dom->createElement('realiseur','Jean-Luc Godard');
-			$film->appendChild($real);
-			$dom->appendChild($film);
-			echo $dom->saveXML();
+			$lastGenre = '';
+			foreach($result as $film) {
+				$currentGenre = $film->genre;
+				if($currentGenre !== $lastGenre) {
+					$genre = $dom->createElement('genre');
+					$genreAttr = $dom->createAttribute('name');
+					$genreAttr->value = $film->genre;
+					$genre->appendChild($genreAttr);
+					$lastGenre = $currentGenre;
+				}
+
+				// Parent
+				$currentFilm = $dom->createElement('film');
+
+				$real = $dom->createElement('realisateur', htmlentities($film->nom.' '.$film->prenom));
+				$originalTitle = $dom->createElement('titreOriginal', htmlentities($film->titre_original));
+				$frenchTitle = $dom->createElement('titreFrancais', htmlentities($film->titre_francais));
+				$country = $dom->createElement('pays', htmlentities($film->pays));
+				$release = $dom->createElement('date', htmlentities($film->date));
+				$duration = $dom->createElement('duree', htmlentities($film->duree));
+				$color = $dom->createElement('couleur', htmlentities($film->couleur));
+				$currentFilm->appendChild($real);
+				$currentFilm->appendChild($originalTitle);
+				$currentFilm->appendChild($frenchTitle);
+				$currentFilm->appendChild($country);
+				$currentFilm->appendChild($release);
+				$currentFilm->appendChild($duration);
+				$currentFilm->appendChild($color);
+
+				$genre->appendChild($currentFilm);
+
+				$dom->appendChild($genre);
+			}
+			$file = $dom->saveXML();
+			date_default_timezone_set('Europe/Paris');
+			$time = date('d/m/Y_G:i:s');
+			write_file('./assets/userfile/XML_export_'.session_id().'_'.$time, $file);
+			force_download('Exportation XML.xml', $file);
 
 		}
 		else {
 
 		}
-	}
-
-	public function test() {
-		$this->load->model('Film_model','', TRUE);
-		$data['allFilm'] = $this->Film_model->getAllFilm();
-
-		$data['tableFilm'] = $this->load->view('table_test',$data,TRUE);
-
-		$data['genre'] = $this->Film_model->getGenre();
-		$this->load->view('test', $data);
 	}
 }
 
