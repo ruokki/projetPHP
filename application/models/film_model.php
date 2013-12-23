@@ -31,7 +31,8 @@ class Film_model extends CI_Model {
 	public function searchFilm($data) {
 		$this->db->select('code_film as id, titre_original, titre_francais, pays, date, duree, couleur, nom, prenom')
 						   ->distinct()
-						   ->from('films, classification')
+						   ->from('films')
+						   ->join('classification', 'films.code_film = classification.ref_code_film')
 						   ->join('individus','individus.code_indiv = films.realisateur');
 	   	foreach($data as $key => $value) {
 	   		if($key === 'genre') {
@@ -40,16 +41,20 @@ class Film_model extends CI_Model {
 	   			}
 	   		}
 	   		else if ($key === 'realisateur') {
-	   			$this->db->like('realisateur', $value, 'after');
+	   			$this->db->like('individus.nom', $value, 'after');
+	   		}
+	   		else if ($key === 'couleur') {
+	   			foreach($value as $couleur) {
+	   				$this->db->where('couleur',$couleur);
+	   			}
 	   		}
 	   		else {
 	   			$this->db->where($key,$value);
 	   		}
 	   	}
 	   	$query = $this->db->get();
-	   	return $this->db->last_query();
-		// if($query->num_rows() > 0) return $query->result();
-		// else return FALSE;
+		if($query->num_rows() > 0) return $query->result();
+		else return FALSE;
 	}
 
 }

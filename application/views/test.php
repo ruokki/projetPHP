@@ -20,116 +20,67 @@
 </head>
 <body>
 	<div class="container">
-		<section class="panel col-md-3">
-			<form action="" name="search" role="form" method="post">
-				<legend><small>Rechercher</small></legend>
-				<div class="form-group">
-					<label for="realSearch">Réalisateur :</label>
-					<input type="text" id="realSearch" placeholder="Godard" class="form-control" >
-				</div>
-				<div class="form-group">
-					<label for="genreSearch">Genre :</label>
-					<select multiple name="genreSearch" id="genreSearch" class="form-control">
-						<option selected="selected" value="0">Aucune</option>
-						<?php
-							echo $optGenre;
-						?>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="dateSearch">Année :</label>
-					<input type="text" name="dateSearch" id="dateSearch" placeholder="2013"  class="form-control">
-				</div>
-				<div class="form-group">
-					<label>Genre :</label>
-					<div class="checkbox">
-						<label for="nb">
-							<input type="checkbox">Noir et Blanc
-						</label>
+		<div class="panel">
+			<section class="panel-heading">
+				<form class="form-inline" role="form" name="search" action="<?php echo base_url(); ?>film/exportXML" method="post" >
+					<legend>Formulaire de recherche</legend>
+					<div class="row">
+						<div class="form-group col-md-3">
+							<label for="inputNameReal">Nom du réalisateur :</label>
+							<input id="inputNameReal" class="form-control" type="text" name="realisateur" placeholder="Godard"/>
+						</div>
+						<div class="form-group col-md-3">
+							<label for="inputYear" >Année :</label>
+							<input id="inputYear" class="form-control" type="text" name="date" placeholder="1980"/>
+						</div>
+						<div class="form-group col-md-3">	
+							<label>Genre :</label>		
+							<select name="genre" class="form-control" multiple="multiple">
+								<option selected="selected" value="0">Aucune</option>
+								<?php
+									echo $optGenre;
+								?>
+							</select>
+						</div>
+						<div class="form-group col-md-2">
+							<label>Couleur :</label>
+							<div>
+								<div><input type="checkbox" name="nb" value="NB" /> Noir et blanc</div>
+								<div><input type="checkbox" name="color" value="couleur" /> Couleur</div>
+								<div><input type="checkbox" name="both" value="NB/couleur" /> Noir et blanc / Couleur</div>
+							</div>
+						</div>
 					</div>
-					<div class="checkbox">
-						<label for="couleur">
-							<input type="checkbox">Couleur
-						</label>
+					<div class="row">
+						<div class="form-group col-md-offset-4 col-md-4">
+							<a id="search" class="btn btn-primary btn-block">Rechercher</a>
+						</div>
 					</div>
-					<div class="checkbox">
-						<label for="both">
-							<input type="checkbox">Noir et Blanc/Couleur
-						</label>
+					<div class="row">
+						<div class="form-group col-md-offset-4 col-md-4">
+							<input type="submit" name="export" id="export" value="Exporter en XML" class="btn btn-primary btn-block" />
+							<p class="help-block">[phrase à trouver]</p>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<input type="submit" value="Rechercher" name="search" id="search" class="btn btn-primary">
-				</div>
-			</form>
-		</section>
+				</form>
+			</section>
 
-		<section class="col-md-6" role="main">
-			<table id="film" class="table table-hover">
-				<caption>
-					<h1>Liste des films</h1>
-				</caption>
-				<tr>
-					<th>Titre original</th>
-					<th>Titre français</th>
-					<th>Réalisateur</th>
-				</tr>
-				<?php
-					echo $tableFilm; 
-				?>
-			</table>
-		</section>
-
-		<section class="panel col-md-3 pull-right">
-			<form action="<?php base_url(); ?>film/exportXML" name="export" role="form" method="post">
-				<legend><small>Exporter en XML</small></legend>
-				<div class="form-group">
-					<label for="real">Réalisateur :</label>
-					<select name="real" id="real" class="form-control">
-						<option selected="selected" value="0">Aucun</option>
-						<?php
-							// foreach($genre as $row) {
-							// 	echo '<option value="'.$row->code_genre.'">'.$row->nom_genre.'</option>';
-							// }
-						?>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="genre">Genre :</label>
-					<select multiple name="genre" id="genre" class="form-control">
-						<option selected="selected" value="0">Aucune</option>
-						<?php
-							echo $optGenre;
-						?>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="date">Année :</label>
-					<input type="text" name="date" id="date" placeholder="2013"  class="form-control">
-				</div>
-				<div class="form-group">
-					<label>Genre :</label>
-					<div class="checkbox">
-						<label for="nb">
-							<input type="checkbox">Noir et Blanc
-						</label>
-					</div>
-					<div class="checkbox">
-						<label for="couleur">
-							<input type="checkbox">Couleur
-						</label>
-					</div>
-					<div class="checkbox">
-						<label for="both">
-							<input type="checkbox">Noir et Blanc/Couleur
-						</label>
-					</div>
-				</div>
-				<div class="form-group">
-					<input type="submit" value="Exporter" name="export" class="btn btn-primary" >
-				</div>
-			</form>
-		</section>
+			<section class="col-md-12 panel-body" role="main">
+				<table id="film" class="table table-hover">
+					<caption>
+						<h1>Liste des films</h1>
+					</caption>
+					<tr>
+						<th>Titre original</th>
+						<th>Titre français</th>
+						<th>Réalisateur</th>
+					</tr>
+					<?php
+						echo $tableFilm; 
+					?>
+				</table>
+			</section>
+		</div>
 	</div>
 	
 	<!-- SCRIPT JS -->

@@ -26,27 +26,34 @@ class Film extends CI_Controller {
 		if($this->input->is_ajax_request()) {
 			$this->load->model('Film_model','', TRUE);
 			$post = $this->input->post();
+			$post['couleur'] = array();
 			foreach($post as $key => &$value) {
-				if($key !== 'genre' && trim($value) === '') {
-					unset($$post[$key]);
-				}
-				else if($key === 'genre') {
+				if($key === 'genre') {
 					foreach($value as $genreKey => &$genreId) {
 						if($genreId === '0') {
-							unset($value[$genreKey]);
+							unset($post[$key]);
 						}
 					}
 				}
+				else if ($key === 'nb' || $key === 'both' || $key === 'color') {
+					unset($post[$key]);
+					array_push($post['couleur'],$value);
+				}
+				else if($key !== 'couleur' && trim($value) === '') {
+					unset($post[$key]);
+				}
+			}
+			if(empty($post['couleur'])){
+				unset($post['couleur']);
 			}
 			$result = $this->Film_model->searchFilm($post);
-			echo $result;
-			// if($result){ 
-			// 	$data['allFilm'] = $result;
-			// 	$this->load->view('film_table',$data);
-			// }
-			// else {
-			// 	echo '<tr></tr>';
-			// }
+			if($result){ 
+				$data['allFilm'] = $result;
+				$this->load->view('film_table',$data);
+			}
+			else {
+				echo '<tr><td>Aucun résultat</td></tr>';
+			}
 		}
 		else {
 			show_404();

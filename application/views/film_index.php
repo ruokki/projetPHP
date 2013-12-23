@@ -47,13 +47,12 @@
 										<label>Couleur :</label>
 										<div>
 											<div><input type="checkbox" name="nb" value="NB" /> Noir et blanc</div>
-											<div><input type="checkbox" name="couleur" value="couleur" /> Couleur</div>
+											<div><input type="checkbox" name="color" value="couleur" /> Couleur</div>
 											<div><input type="checkbox" name="both" value="NB/couleur" /> Noir et blanc / Couleur</div>
 										</div>
 									</div>
 									<div class="form-group col-md-2">
 										<a id="search" class="btn btn-primary pull-right">Rechercher</a>
-										<input type="submit" value="Exporter en XML" class="btn btn-primary pull-right" />
 									</div>
 								</div>
 							</form>
