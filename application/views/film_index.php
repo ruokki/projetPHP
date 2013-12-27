@@ -26,15 +26,15 @@
 					<legend>Formulaire de recherche</legend>
 					<div class="row">
 						<div class="form-group col-md-2">
-							<label for="inputNameReal">Nom du réalisateur :</label>
+							<label for="inputNameReal">Nom du réalisateur</label>
 							<input id="inputNameReal" class="form-control" type="text" name="realisateur" placeholder="Godard"/>
 						</div>
 						<div class="form-group col-md-2">
-							<label for="inputYear" >Année :</label>
+							<label for="inputYear" >Année</label>
 							<input id="inputYear" class="form-control" type="text" name="date" placeholder="1980"/>
 						</div>
 						<div class="form-group col-md-3">	
-							<label>Genre :</label>		
+							<label>Genre</label>		
 							<select name="genre[]" class="form-control" multiple="multiple">
 								<option selected="selected" value="0">Aucune</option>
 								<?php
@@ -43,7 +43,7 @@
 							</select>
 						</div>
 						<div class="form-group col-md-3">
-							<label>Couleur :</label>
+							<label>Couleur</label>
 							<div>
 								<div><input type="checkbox" name="nb" value="NB" /> Noir et blanc</div>
 								<div><input type="checkbox" name="color" value="couleur" /> Couleur</div>
