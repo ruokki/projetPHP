@@ -67,7 +67,7 @@ class Film extends CI_Controller {
 	*/
 	public function getReal(){
 		if($this->input->is_ajax_request()) {
-			$search = $this->input->post("term");
+			$search = $this->input->post('term');
 			$this->load->model('Film_model','', TRUE);
 			$reals = $this->Film_model->getReal($search);
 			if($reals) {
@@ -79,6 +79,26 @@ class Film extends CI_Controller {
 		}
 	}
 
+	public function infoFilm() {
+		if($this->input->is_ajax_request()) {
+			$this->load->model('Film_model', '', TRUE);
+			$data['code_film'] = $this->input->post('id');
+			$result = $this->Film_model->searchFilm($data);
+			$film = $result[0];
+			foreach($film as &$value) {
+				$value = trim($value);
+			}
+			$total = count($result);
+			if($total > 1) {
+				for($i = 1; $i < $total; $i++ ) {
+					$film->genre .= ', '.trim($result[$i]->genre);
+				}
+			}
+			$data['film'] = $film;
+			$this->load->view('film_info', $data);
+		}
+	}
+
 	/**
 	* Fonction générant le fichier XML en fonction du formulaire de XMLForm
 	* Télécharge le fichier XML généré
@@ -87,7 +107,7 @@ class Film extends CI_Controller {
 
 	public function exportXML() {
 		session_start();
-		if($genre = $this->input->post("genre")) {
+		if($genre = $this->input->post('genre')) {
 			$this->load->model('Film_model','',TRUE);
 			$this->load->helper('file');
 			$this->load->helper('download');

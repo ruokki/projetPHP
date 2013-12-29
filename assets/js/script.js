@@ -9,13 +9,77 @@
 	var maxTr = tr.length;
 	for(var i = 0; i < maxTr; i++) {
 		tr[i].addEventListener("click",function(e){
+			var thos = this;
 			var td = this.querySelector(".hidden");
+			var originalTitle = this.querySelector(":nth-child(2)").innerHTML;
+			var frenchTitle = this.querySelector(":nth-child(3)").innerHTML;
 			var id = (td) ? td.textContent : "";
 			if(id !== "") {
-				$("body").append('<div id="modal"></div>');
+				$("#titreFilm").text(frenchTitle);
+				$.ajax({
+					url: "http://localhost/projetPHP/film/infoFilm",
+					method: "post",
+					data: {
+						id: id
+					},
+					success: function(data) {
+						$("#filmInfo").find(".modal-body").html(data);
+					}
+				});
+
+				$.ajax({
+					url:"http://www.imdbapi.com/",
+					method: "get",
+					dataType: "JSON",
+					data: {
+						i: "",
+						t: originalTitle.toLowerCase()
+					},
+					success: function(data) {
+						$("#filmInfo").find('.modal-body img').attr("src",data.Poster);
+						$("#filmInfo").modal("show");
+					}
+				});
 			}
 		});
 	}
+
+	// $("table#film tr").popover({
+	// 	title: function() {
+	// 		return this.querySelector("td:nth-child(3)").innerHTML;
+	// 	},
+	// 	placement: "auto",
+	// 	html: true,
+	// 	content: function() {
+	// 		var id = this.querySelector(".hidden").innerHTML;
+	// 		var title = this.querySelector("td:nth-child(2)").innerHTML;
+	// 		var thos = this;
+
+	// 		$.ajax({
+	// 			url: "http://localhost/projetPHP/film/infoFilm",
+	// 			method: "post",
+	// 			data: {
+	// 				id: id
+	// 			},
+	// 			success: function(data) {
+	// 				$(thos).next(".popover").find('.popover-content').html(data);
+	// 			}
+	// 		});
+
+	// 		$.ajax({
+	// 			url:"http://www.imdbapi.com/",
+	// 			method: "get",
+	// 			dataType: "JSON",
+	// 			data: {
+	// 				i: "",
+	// 				t: title.toLowerCase()
+	// 			},
+	// 			success: function(data) {
+	// 				$(thos).next(".popover").find('.popover-content img').attr("src",data.Poster);
+	// 			}
+	// 		});
+	// 	}
+	// });
 
 	/**
 	* Fonction récupérant les films correspondant à la recherche

@@ -14,7 +14,6 @@
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap-3.0.2/css/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/jquery-ui-1.10.3/css/jquery-ui-1.10.3.min.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css" type="text/css">
 	<!-- END CSS -->
 </head>
@@ -26,15 +25,15 @@
 					<legend>Formulaire de recherche</legend>
 					<div class="row">
 						<div class="form-group col-md-3">
-							<label for="inputNameReal">Nom du réalisateur :</label>
+							<label for="inputNameReal">Nom du réalisateur</label>
 							<input id="inputNameReal" class="form-control" type="text" name="realisateur" placeholder="Godard"/>
 						</div>
 						<div class="form-group col-md-3">
-							<label for="inputYear" >Année :</label>
+							<label for="inputYear" >Année</label>
 							<input id="inputYear" class="form-control" type="text" name="date" placeholder="1980"/>
 						</div>
 						<div class="form-group col-md-3">	
-							<label>Genre :</label>		
+							<label>Genre</label>		
 							<select name="genre[]" class="form-control" multiple="multiple">
 								<option selected="selected" value="0">Aucune</option>
 								<?php
@@ -43,7 +42,7 @@
 							</select>
 						</div>
 						<div class="form-group col-md-2">
-							<label>Couleur :</label>
+							<label>Couleur</label>
 							<div>
 								<div><input type="checkbox" name="nb" value="NB" /> Noir et blanc</div>
 								<div><input type="checkbox" name="color" value="couleur" /> Couleur</div>
@@ -81,6 +80,23 @@
 				</table>
 			</section>
 		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="filmInfo" tabindex="-1" role="dialog" aria-labelledby="titreFilm" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="titreFilm">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		        ...
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 	</div>
 	
 	<!-- SCRIPT JS -->
