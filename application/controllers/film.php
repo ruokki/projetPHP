@@ -79,6 +79,11 @@ class Film extends CI_Controller {
 		}
 	}
 
+	/**
+	* Fonction uniquement accesible via AJAX
+	* Récuèpre les informations d'un film donnés
+	* @return JSON
+	*/
 	public function infoFilm() {
 		if($this->input->is_ajax_request()) {
 			$this->load->model('Film_model', '', TRUE);

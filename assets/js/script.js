@@ -41,45 +41,11 @@
 					}
 				});
 			}
+			else {
+				console.log("La variable id est vide");
+			}
 		});
 	}
-
-	// $("table#film tr").popover({
-	// 	title: function() {
-	// 		return this.querySelector("td:nth-child(3)").innerHTML;
-	// 	},
-	// 	placement: "auto",
-	// 	html: true,
-	// 	content: function() {
-	// 		var id = this.querySelector(".hidden").innerHTML;
-	// 		var title = this.querySelector("td:nth-child(2)").innerHTML;
-	// 		var thos = this;
-
-	// 		$.ajax({
-	// 			url: "http://localhost/projetPHP/film/infoFilm",
-	// 			method: "post",
-	// 			data: {
-	// 				id: id
-	// 			},
-	// 			success: function(data) {
-	// 				$(thos).next(".popover").find('.popover-content').html(data);
-	// 			}
-	// 		});
-
-	// 		$.ajax({
-	// 			url:"http://www.imdbapi.com/",
-	// 			method: "get",
-	// 			dataType: "JSON",
-	// 			data: {
-	// 				i: "",
-	// 				t: title.toLowerCase()
-	// 			},
-	// 			success: function(data) {
-	// 				$(thos).next(".popover").find('.popover-content img').attr("src",data.Poster);
-	// 			}
-	// 		});
-	// 	}
-	// });
 
 	/**
 	* Fonction récupérant les films correspondant à la recherche

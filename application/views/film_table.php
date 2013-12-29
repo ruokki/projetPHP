@@ -1,8 +1,8 @@
 <?php foreach($allFilm as $film) : ?>
-<tr>
+<tr class="col-md-12">
 	<td class="hidden"><?php echo $film->id; ?></td>
-	<td><?php echo $film->titre_original; ?></td>
-	<td><?php echo $film->titre_francais; ?></td>
-	<td><?php echo $film->prenom.' '.$film->nom; ?></td>
+	<td class="col-md-4"><?php echo $film->titre_original; ?></td>
+	<td class="col-md-4"><?php echo $film->titre_francais; ?></td>
+	<td class="col-md-4"><?php echo $film->prenom.' '.$film->nom; ?></td>
 </tr>
 <?php endforeach; ?>

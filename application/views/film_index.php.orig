@@ -24,11 +24,19 @@
 				<form class="form-inline" role="form" name="search" action="<?php echo base_url(); ?>film/exportXML" method="post" >
 					<legend>Formulaire de recherche</legend>
 					<div class="row">
+<<<<<<< HEAD
+						<div class="form-group col-md-3">
+							<label for="inputNameReal">Nom du réalisateur</label>
+							<input id="inputNameReal" class="form-control" type="text" name="realisateur" placeholder="Godard"/>
+						</div>
+						<div class="form-group col-md-3">
+=======
 						<div class="form-group col-md-2">
 							<label for="inputNameReal">Nom du réalisateur</label>
 							<input id="inputNameReal" class="form-control" type="text" name="realisateur" placeholder="Godard"/>
 						</div>
 						<div class="form-group col-md-2">
+>>>>>>> c7e8dcfac27fb2315522a64ab2d86985bfd9fc97
 							<label for="inputYear" >Année</label>
 							<input id="inputYear" class="form-control" type="text" name="date" placeholder="1980"/>
 						</div>
@@ -41,7 +49,11 @@
 								?>
 							</select>
 						</div>
+<<<<<<< HEAD
+						<div class="form-group col-md-2">
+=======
 						<div class="form-group col-md-3">
+>>>>>>> c7e8dcfac27fb2315522a64ab2d86985bfd9fc97
 							<label>Couleur</label>
 							<div>
 								<div><input type="checkbox" name="nb" value="NB" /> Noir et blanc</div>
@@ -63,9 +75,13 @@
 				<div class="table-responsive">
 					<table id="film" class="table table-hover">
 						<tr id="head" class="col-md-12">
-							<th class="col-md-4">Titre original</th>
-							<th class="col-md-4">Titre français</th>
-							<th class="col-md-4">Réalisateur</th>
+							<th class="col-md-2">Titre original</th>
+							<th class="col-md-2">Titre français</th>
+							<th class="col-md-1">Pays</th>
+							<th class="col-md-2">Année de sortie</th>
+							<th class="col-md-1">Durée</th>
+							<th class="col-md-2">Colorisation</th>
+							<th class="col-md-2">Réalisateur</th>
 						</tr>
 						<?php
 							echo $tableFilm; 
