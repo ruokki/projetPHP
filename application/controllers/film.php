@@ -9,6 +9,18 @@ class Film extends CI_Controller {
 	*/
 	public function index()
 	{
+
+		$cookie = array(
+			'name' => 'URL',
+			'value' => base_url(),
+			'expire' => '6000',
+			'domain' => '',
+			'path' => '/',
+			'prefix' => '',
+			'secure' => FALSE
+		);
+		$this->input->set_cookie($cookie);
+
 		$this->load->model('Film_model','', TRUE);
 		$data['allFilm'] = $this->Film_model->getAllFilm();
 
